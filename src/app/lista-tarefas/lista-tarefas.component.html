@@ -77,14 +77,18 @@
     [(ngModel)]="campoBusca"
     (keyup)="filtrarTarefasPorDescricao(campoBusca)"
     >
+    <!-- campoBusca, passado como paramentro -->
+    <!--[(ngModel)] Vinculação bidirecional, diretiva ngModel-->
+
   </div>
 
   <div *ngIf="tarefasFiltradas.length > 0, else semTarefas">
     <div
-      class="lista-tarefas card-{{ tarefa.categoria }}"
-      *ngFor="let tarefa of tarefasFiltradas; let i = index"
-      (mouseover)="indexTarefa = i"
-      [@highlightedState]="indexTarefa === i ? 'highlighted' : 'default'">
+    @filterAnimation
+    class="lista-tarefas card-{{ tarefa.categoria }}"
+    *ngFor="let tarefa of tarefasFiltradas; let i = index"
+    (mouseover)="indexTarefa = i"
+    [@highlightedState]="indexTarefa === i ? 'highlighted' : 'default'">
       <div class="info-card">
         <p class="categoria-tarefa categoria-{{ tarefa.categoria }}">
           <img

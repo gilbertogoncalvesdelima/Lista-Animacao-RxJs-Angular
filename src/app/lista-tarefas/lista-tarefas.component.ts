@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
-import { checkButtonTrigger, highlightedStateTrigger, shownStateTrigger } from '../animations';
+import { checkButtonTrigger, filterTrigger, highlightedStateTrigger, shownStateTrigger } from '../animations';
 
 @Component({
   selector: 'app-lista-tarefas',
@@ -13,9 +13,11 @@ import { checkButtonTrigger, highlightedStateTrigger, shownStateTrigger } from '
   animations: [
     highlightedStateTrigger,
     shownStateTrigger,
-    checkButtonTrigger
+    checkButtonTrigger,
+    filterTrigger
   ]
 })
+
 export class ListaTarefasComponent implements OnInit {
   listaTarefas: Tarefa[] = [];
   formAberto: boolean = false;
@@ -24,6 +26,7 @@ export class ListaTarefasComponent implements OnInit {
   indexTarefa: number = -1;
   id: number = 0;
   campoBusca: string = '';
+  // foi criado um agtributo tarefasFiltradas, array resultante da busca, inicializando o array vazio
   tarefasFiltradas: Tarefa[] = [];
 
   formulario: FormGroup = this.fomBuilder.group({
@@ -49,11 +52,14 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   filtrarTarefasPorDescricao(descricao: string) {
+    // trim para remover os espaços e toLocaleLowerCase, para deixar as letras minusculas
    this.campoBusca = descricao.trim().toLocaleLowerCase()
+  //   Se a pessoa digitou alguma coisa no campo de busca, eu irei poopular o array de tarefas filtradas
    if(descricao) {
     // para saber se o termo que digito vai da certo com a tarefa que ja existe com a descrição vamos utilizar o metodo includes
     this.tarefasFiltradas = this.listaTarefas.filter(tarefa => tarefa.descricao.toLocaleLowerCase().includes(this.campoBusca))
    } else {
+    // array tarefasFiltradas irá receber a listaTarefas
     this.tarefasFiltradas = this.listaTarefas
    }
   }
