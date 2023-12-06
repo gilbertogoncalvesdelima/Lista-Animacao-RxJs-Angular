@@ -4,7 +4,9 @@
       Criar nova tarefa
     </button>
   </div>
-  <form @shownState class="formulario ff-prompt"
+  <form @shownState
+    [@formButton]="formulario.valid ? 'valid' : 'invalid'"
+    class="formulario ff-prompt"
     [formGroup]="formulario"
     *ngIf="formAberto">
     <label for="descricao">Descrição da tarefa</label>
@@ -48,7 +50,7 @@
     </app-mensagem>
     <div class="botoes-form">
       <button
-        [@formButton]="formulario.valid ? 'valid' : 'invalid'"
+        id="botao-salvar"
         (click)="salvarTarefa()"
         class="botao-form"
         [ngClass]="habilitarBotao()"
