@@ -92,6 +92,7 @@ export const filterTrigger = trigger('filterAnimation', [
 export const formButtonTrigger = trigger('formButton', [
 
   transition('invalid => valid', [
+    // Com o método query(), podemos consultar e animar qualquer elemento que estiver dentro do formulário.
     query('#botao-salvar', [
       // group, Animações que eu quero ajuntar, todas animações que estão dentro do group, elas são executadas simultaneamente o que acaba reduzindo o tempo de espera da conclusão da transição
       group([
@@ -125,9 +126,13 @@ export const formButtonTrigger = trigger('formButton', [
   ])
 ])
 
+// Animação caso não preencha nada, na descrição da tarefa
 export const shakeTrigger = trigger('shakeAnimation', [
+  // '* => *' animar de qualquer estado para qualquer estado
   transition('* => *', [
+    //  query(':self, input.ng-invalid:focus, select.ng-invalid:focus', [, se adionar o :self, treme o formulario todo bem legal também
     query('input.ng-invalid:focus, select.ng-invalid:focus', [
+      // keyframes, recebe um array de estilos
       animate('0.5s', keyframes([
         style({ border: '2px solid red'}),
         style({ transform: 'translateX(0)'}),
