@@ -59,8 +59,10 @@ export const filterTrigger = trigger('filterAnimation', [
 ])
 
 export const formButtonTrigger = trigger('formButton', [
+
   transition('invalid => valid', [
     query('#botao-salvar', [
+      // group, Animações que eu quero ajuntar, todas animações que estão dentro do group, elas são executadas simultaneamente o que acaba reduzindo o tempo de espera da conclusão da transição
       group([
         animate(200, style({
           backgroundColor: '#63B77C'
@@ -74,6 +76,7 @@ export const formButtonTrigger = trigger('formButton', [
       }))
     ]),
   ]),
+
   transition('valid => invalid', [
     query('#botao-salvar', [
       group([
