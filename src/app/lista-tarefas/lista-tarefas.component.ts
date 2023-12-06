@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
 import { checkButtonTrigger, filterTrigger, formButtonTrigger, highlightedStateTrigger, shakeTrigger, shownStateTrigger } from '../animations';
@@ -23,7 +24,7 @@ import { checkButtonTrigger, filterTrigger, formButtonTrigger, highlightedStateT
 export class ListaTarefasComponent implements OnInit {
   listaTarefas: Tarefa[] = [];
   // true, ja fique com o furmulario aberto
-  formAberto: boolean = true;
+  formAberto: boolean = false;
   categoria: string = '';
   validado: boolean = false;
   indexTarefa: number = -1;

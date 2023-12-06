@@ -1,4 +1,4 @@
-import { animate, group, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
+import { animate,  group, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
 
 // keyframes e offset, eles são recursos muitos importante para criar animações no angular, com ele você consegue inserir estilos intermediarios e também controlar o tempo que as mudanças css vão ocorrer
 
@@ -75,6 +75,17 @@ export const flyInOutTrigger =
     ])
   ])
 
+  export const flyInOut = trigger('flyInOut', [
+    state('in', style({ transform: 'translateX(0)' })),
+    transition('void => *', [
+      style({ transform: 'translateX(-100%)' }),
+      animate('0.5s ease-in')
+    ]),
+    transition('* => void', [
+      animate('0.5s ease-out', style({ transform: 'translateX(100%)' }))
+    ])
+  ]);
+
 export const filterTrigger = trigger('filterAnimation', [
   transition(':enter', [
     style({opacity: 0, width: 0}),
@@ -144,7 +155,7 @@ export const shakeTrigger = trigger('shakeAnimation', [
         style({ transform: 'translateX(10px)'}),
         style({ transform: 'translateX(0)'}),
       ]))
-    ], {optional: true})
+    ], {optional: true}) // Se não houver elementos correspondentes a está consulta durante o carregamento inicial, não tem problema ele irá ignorar, só irá aparecer quando os elementos forem encontrados
   ])
 ])
 
@@ -169,6 +180,6 @@ export const listStateTrigger = trigger('listState', [
           })
         ]))
       ])
-    ], {optional: true})
+    ], {optional: true}) // Se não houver elementos correspondentes a está consulta durante o carregamento inicial, não tem problema ele irá ignorar, só irá aparecer quando os elementos forem encontrados
   ])
 ])
