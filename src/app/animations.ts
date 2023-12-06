@@ -1,6 +1,4 @@
-import { animate,  group, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
-
-// keyframes e offset, eles são recursos muitos importante para criar animações no angular, com ele você consegue inserir estilos intermediarios e também controlar o tempo que as mudanças css vão ocorrer
+import { animate, group, keyframes, query, stagger, state, style, transition, trigger } from '@angular/animations';
 
 export const highlightedStateTrigger = trigger('highlightedState', [
   state('default', style({
@@ -44,52 +42,10 @@ export const checkButtonTrigger = trigger('checkButton', [
   ])
 ])
 
-export const flyInOutTrigger =
-  trigger('flyInOut', [
-    transition(':enter', [
-      style({
-        width: '100%',
-        transform: 'translateX(-100%)',
-        opacity: 0
-      }),
-      group([
-        animate('0.3s 0.1s ease', style({
-          transform: 'translateX(0)',
-          width: '*'
-        })),
-        animate('0.3s ease', style({
-          opacity: 1
-        }))
-      ])
-    ]),
-    transition(':leave', [
-      group([
-        animate('0.3s ease', style({
-          transform: 'translateX(100%)',
-          width: '*'
-        })),
-        animate('0.3s 0.2s ease', style({
-          opacity: 0
-        }))
-      ])
-    ])
-  ])
-
-  export const flyInOut = trigger('flyInOut', [
-    state('in', style({ transform: 'translateX(0)' })),
-    transition('void => *', [
-      style({ transform: 'translateX(-100%)' }),
-      animate('0.5s ease-in')
-    ]),
-    transition('* => void', [
-      animate('0.5s ease-out', style({ transform: 'translateX(100%)' }))
-    ])
-  ]);
-
 export const filterTrigger = trigger('filterAnimation', [
   transition(':enter', [
     style({opacity: 0, width: 0}),
-    animate('2000ms ease-out', keyframes([
+    animate('400ms ease-out', keyframes([
       style({offset: 0, opacity:0, width:0}),
       style({offset: 0.8, opacity:0.5, width:'*'}),
       style({offset: 1, opacity:1, width:'*'})
@@ -101,11 +57,8 @@ export const filterTrigger = trigger('filterAnimation', [
 ])
 
 export const formButtonTrigger = trigger('formButton', [
-
   transition('invalid => valid', [
-    // Com o método query(), podemos consultar e animar qualquer elemento que estiver dentro do formulário.
     query('#botao-salvar', [
-      // group, Animações que eu quero ajuntar, todas animações que estão dentro do group, elas são executadas simultaneamente o que acaba reduzindo o tempo de espera da conclusão da transição
       group([
         animate(200, style({
           backgroundColor: '#63B77C'
@@ -119,7 +72,6 @@ export const formButtonTrigger = trigger('formButton', [
       }))
     ]),
   ]),
-
   transition('valid => invalid', [
     query('#botao-salvar', [
       group([
@@ -137,13 +89,9 @@ export const formButtonTrigger = trigger('formButton', [
   ])
 ])
 
-// Animação caso não preencha nada, na descrição da tarefa
 export const shakeTrigger = trigger('shakeAnimation', [
-  // '* => *' animar de qualquer estado para qualquer estado
   transition('* => *', [
-    //  query(':self, input.ng-invalid:focus, select.ng-invalid:focus', [, se adionar o :self, treme o formulario todo bem legal também
     query('input.ng-invalid:focus, select.ng-invalid:focus', [
-      // keyframes, recebe um array de estilos
       animate('0.5s', keyframes([
         style({ border: '2px solid red'}),
         style({ transform: 'translateX(0)'}),
@@ -155,7 +103,7 @@ export const shakeTrigger = trigger('shakeAnimation', [
         style({ transform: 'translateX(10px)'}),
         style({ transform: 'translateX(0)'}),
       ]))
-    ], {optional: true}) // Se não houver elementos correspondentes a está consulta durante o carregamento inicial, não tem problema ele irá ignorar, só irá aparecer quando os elementos forem encontrados
+    ], {optional: true})
   ])
 ])
 
@@ -167,7 +115,7 @@ export const listStateTrigger = trigger('listState', [
         transform: 'translateX(-100%)',
       }),
       stagger(200, [
-        animate('800ms ease-out', keyframes([
+        animate('500ms ease-out', keyframes([
           style({
             opacity: 1,
             transform: 'translateX(15%)',
@@ -180,6 +128,6 @@ export const listStateTrigger = trigger('listState', [
           })
         ]))
       ])
-    ], {optional: true}) // Se não houver elementos correspondentes a está consulta durante o carregamento inicial, não tem problema ele irá ignorar, só irá aparecer quando os elementos forem encontrados
+    ], {optional: true})
   ])
 ])

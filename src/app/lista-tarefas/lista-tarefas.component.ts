@@ -8,6 +8,7 @@ import {
   filterTrigger,
   formButtonTrigger,
   highlightedStateTrigger,
+  listStateTrigger,
   shakeTrigger,
   shownStateTrigger
 } from '../animations';
@@ -23,7 +24,8 @@ import { Subscription } from 'rxjs';
     checkButtonTrigger,
     filterTrigger,
     formButtonTrigger,
-    shakeTrigger
+    shakeTrigger,
+    listStateTrigger
   ]
 })
 export class ListaTarefasComponent implements OnInit {

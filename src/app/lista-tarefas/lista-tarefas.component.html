@@ -75,23 +75,19 @@
   <div class="busca">
     <p class="ff-prompt">Procurando o que fazer?</p>
     <input
-    type="search"
-    id="campo-busca"
-    placeholder="Busque por uma tarefa"
-    [(ngModel)]="campoBusca"
-    (keyup)="filtrarTarefasPorDescricao(campoBusca)"
-    >
-    <!-- campoBusca, passado como paramentro -->
-    <!--[(ngModel)] Vinculação bidirecional, diretiva ngModel-->
-
+      id="campo-busca" type="search"
+      placeholder="Busque por uma tarefa"
+      [(ngModel)]="campoBusca"
+      (keyup)="filtrarTarefasPorDescricao(campoBusca)"
+  >
   </div>
-
-  <div *ngIf="tarefasFiltradas.length > 0, else semTarefas">
+  <div @listState *ngIf="tarefasFiltradas.length > 0, else semTarefas">
     <div
-    class="lista-tarefas card-{{ tarefa.categoria }}"
-    *ngFor="let tarefa of tarefasFiltradas; let i = index"
-    (mouseover)="indexTarefa = i"
-    [@highlightedState]="indexTarefa === i ? 'highlighted' : 'default'">
+      @filterAnimation
+      class="lista-tarefas card-{{ tarefa.categoria }}"
+      *ngFor="let tarefa of tarefasFiltradas; let i = index"
+      (mouseover)="indexTarefa = i"
+      [@highlightedState]="indexTarefa === i ? 'highlighted' : 'default'">
       <div class="info-card">
         <p class="categoria-tarefa categoria-{{ tarefa.categoria }}">
           <img
@@ -105,8 +101,8 @@
         <p class="status-tarefa">
           <button
             [ngClass]="(tarefa.statusFinalizado == true) ? 'icone-checked' : 'icone-unchecked'"
-            (click)="finalizarTarefa(tarefa.id)"
-            [@checkButton]="(tarefa.id === id ? 'checked' : 'unchecked')"
+            (click)="finalizarTarefa(tarefa)"
+            [@checkButton]="tarefa.id === id && estadoBotao"
             >
           </button>
         </p>
@@ -134,5 +130,5 @@
   </div>
 </section>
 <ng-template #semTarefas>
-  <p class="ng-template ff-prompt">Olá! Ainda não há tarefas por aqui!</p>
+  <p class="ng-template ff-prompt">Olá! Ainda não há tarefas por aqui! :)</p>
 </ng-template>
