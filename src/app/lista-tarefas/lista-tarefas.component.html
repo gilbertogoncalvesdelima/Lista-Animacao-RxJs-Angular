@@ -88,7 +88,6 @@
 
   <div *ngIf="tarefasFiltradas.length > 0, else semTarefas">
     <div
-    @filterAnimation
     class="lista-tarefas card-{{ tarefa.categoria }}"
     *ngFor="let tarefa of tarefasFiltradas; let i = index"
     (mouseover)="indexTarefa = i"
@@ -135,5 +134,5 @@
   </div>
 </section>
 <ng-template #semTarefas>
-  <p @flyInOut class="ng-template ff-prompt">Olá! Ainda não há tarefas por aqui!</p>
+  <p class="ng-template ff-prompt">Olá! Ainda não há tarefas por aqui!</p>
 </ng-template>
